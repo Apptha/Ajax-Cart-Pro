@@ -1,0 +1,240 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * Apptha
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.apptha.com/LICENSE.txt
+ *
+ * ==============================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * ==============================================================
+ * This package designed for Magento COMMUNITY edition
+ * Apptha does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * Apptha does not provide extension support in case of
+ * incorrect edition usage.
+ * ==============================================================
+ *
+ * @category    Apptha
+ * @package     Apptha_AjaxCartPro
+ * @version     1.1
+ * @author      Apptha Team <developers@contus.in>
+ * @copyright   Copyright (c) 2014 Apptha. (http://www.apptha.com)
+ * @license     http://www.apptha.com/LICENSE.txt
+ *
+ * */
+ -->
+<config>
+    <modules>
+        <Apptha_Ajaxcartpro>
+            <version>0.1.1</version>
+        </Apptha_Ajaxcartpro>
+    </modules>
+    <frontend>
+        <routers>
+            <ajaxcartpro>
+                <use>standard</use>
+                <args>
+                    <module>Apptha_Ajaxcartpro</module>
+                    <frontName>ajaxcartpro</frontName>
+                </args>
+            </ajaxcartpro>
+        </routers>
+        <layout>
+            <updates>
+                <Apptha_Ajaxcartpro module="Apptha_Ajaxcartpro">
+                    <file>ajaxcartpro.xml</file>
+                </Apptha_Ajaxcartpro>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+            <ajaxcartpro>
+                <use>admin</use>
+                <args>
+                    <module>Apptha_Ajaxcartpro</module>
+                    <frontName>ajaxcartproo</frontName>
+                </args>
+            </ajaxcartpro>
+        </routers>
+    </admin>
+    <adminhtml>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <Apptha_Ajaxcartpro>
+                            <title>Ajaxcartpro Module</title>
+                            <sort_order>10</sort_order>
+                        </Apptha_Ajaxcartpro>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <layout>
+            <updates>
+                <Apptha_Ajaxcartpro module="Apptha_Ajaxcartpro">
+                    <file>ajaxcartpro.xml</file>
+                </Apptha_Ajaxcartpro>
+            </updates>
+        </layout>
+    </adminhtml>
+    <global>
+        <models>
+            <ajaxcartpro>
+                <class>Apptha_Ajaxcartpro_Model</class>
+                <resourceModel>ajaxcartpro_mysql4</resourceModel>
+            </ajaxcartpro>
+            <ajaxcartpro_mysql4>
+                <class>Apptha_Ajaxcartpro_Model_Mysql4</class>
+                <entities>
+                    <ajaxcartpro>
+                        <table>ajaxcartpro</table>
+                    </ajaxcartpro>
+                </entities>
+            </ajaxcartpro_mysql4>
+        </models>
+        <events>
+            <checkout_cart_add_product_complete>
+                <observers>
+                    <ajaxcartpro_observer>
+                        <type>singleton</type>
+                        <class>ajaxcartpro/observer</class>
+                        <method>addtoCart</method>
+                    </ajaxcartpro_observer>
+                </observers>
+            </checkout_cart_add_product_complete>
+            <controller_action_postdispatch_catalog_product_view>
+                <observers>
+                    <ajaxcartpro_observer>
+                        <type>singleton</type>
+                        <class>ajaxcartpro/observer</class>
+                        <method>ajaxCustomOptions</method>
+                    </ajaxcartpro_observer>
+                </observers>
+            </controller_action_postdispatch_catalog_product_view>
+        </events>
+        <resources>
+            <ajaxcartpro_setup>
+                <setup>
+                    <module>Apptha_Ajaxcartpro</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </ajaxcartpro_setup>
+            <ajaxcartpro_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </ajaxcartpro_write>
+            <ajaxcartpro_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </ajaxcartpro_read>
+        </resources>
+        <blocks>
+            <ajaxcartpro>
+                <class>Apptha_Ajaxcartpro_Block</class>
+            </ajaxcartpro>
+        </blocks>
+        <rewrite>
+            <Apptha_Ajaxcartpro_CheckoutCartIndex>
+
+                <from><![CDATA[ #^/checkout/cart/index/#  ]]>
+                </from>
+
+                <to>/ajaxcartpro/cart/index/</to>
+
+            </Apptha_Ajaxcartpro_CheckoutCartIndex>
+            <Apptha_Ajaxcartpro_CheckoutCartUpdatePost>
+
+                <from><![CDATA[ #^/checkout/cart/updatePost/#  ]]>
+                </from>
+
+                <to>/ajaxcartpro/cart/updatePost/</to>
+
+            </Apptha_Ajaxcartpro_CheckoutCartUpdatePost>
+            <Apptha_Ajaxcartpro_CheckoutCartCouponPost>
+
+                <from><![CDATA[ #^/checkout/cart/couponPost/#  ]]>
+                </from>
+
+                <to>/ajaxcartpro/cart/couponPost/</to>
+
+            </Apptha_Ajaxcartpro_CheckoutCartCouponPost>
+            <Apptha_Ajaxcartpro_CheckoutCartEstimatePost>
+
+                <from><![CDATA[ #^/checkout/cart/estimatePost/#  ]]>
+                </from>
+
+                <to>/ajaxcartpro/cart/estimatePost/</to>
+
+            </Apptha_Ajaxcartpro_CheckoutCartEstimatePost>
+            <Apptha_Ajaxcartpro_estimateUpdatePost>
+
+                <from><![CDATA[ #^/checkout/cart/estimateUpdatePost/#  ]]>
+                </from>
+
+                <to>/ajaxcartpro/cart/estimateUpdatePost/</to>
+
+            </Apptha_Ajaxcartpro_estimateUpdatePost>
+            <Apptha_Ajaxcartpro_wishlistPost>
+
+                <from><![CDATA[ #^/wishlist/index/cart/#  ]]>
+                </from>
+
+                <to>/ajaxcartpro/wishlist/cart/</to>
+
+            </Apptha_Ajaxcartpro_wishlistPost>
+            <Apptha_Ajaxcartpro_wishlistallPost>
+
+                <from><![CDATA[ #^/wishlist/index/allcart/#  ]]>
+                </from>
+
+                <to>/ajaxcartpro/wishlist/allcart/</to>
+
+            </Apptha_Ajaxcartpro_wishlistallPost>
+            <Apptha_Ajaxcartpro_reorder>
+
+                <from><![CDATA[ #^/checkout/cart/addgroup/#  ]]>
+                </from>
+
+                <to>/ajaxcartpro/cart/addgroup/</to>
+
+            </Apptha_Ajaxcartpro_reorder>
+            <Apptha_Ajaxcartpro_updateitemscart>
+
+                <from><![CDATA[ #^/checkout/cart/updateItemOptions/#  ]]>
+                </from>
+
+                <to>/ajaxcartpro/cart/updateItemOptions/</to>
+
+            </Apptha_Ajaxcartpro_updateitemscart>
+            <Apptha_Ajaxcartpro_checkout>
+
+                <from><![CDATA[ #^/googlecheckout/redirect/checkout/#  ]]>
+                </from>
+
+                <to>/ajaxcartpro/redirect/checkout/</to>
+
+            </Apptha_Ajaxcartpro_checkout>
+            
+        </rewrite>
+        <helpers>
+            <ajaxcartpro>
+                <class>Apptha_Ajaxcartpro_Helper</class>
+            </ajaxcartpro>
+        </helpers>
+    </global>
+</config>

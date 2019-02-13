@@ -1,0 +1,66 @@
+<?php
+/**
+ * Apptha
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.apptha.com/LICENSE.txt
+ *
+ * ==============================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * ==============================================================
+ * This package designed for Magento COMMUNITY edition
+ * Apptha does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * Apptha does not provide extension support in case of
+ * incorrect edition usage.
+ * ==============================================================
+ *
+ * @category    Apptha
+ * @package     Apptha_AjaxCartPro
+ * @version     1.1
+ * @author      Apptha Team <developers@contus.in>
+ * @copyright   Copyright (c) 2014 Apptha. (http://www.apptha.com)
+ * @license     http://www.apptha.com/LICENSE.txt
+ *
+ * */
+?>
+
+<!-- Popup-box starts -->
+<div id="popup-block" class="pop" style="display:none; ">
+    
+    <div class="white-grid">
+        <div id="loading-box">
+    <img src="<?php echo $this->getSkinUrl('ajaxcartpro/images/progress-bar.gif'); ?>" alt="loading please wait" />
+</div>
+        <a href="javascript:void(0)" onclick="ajaxClose('popup-block');" class="Close_link"></a>
+       
+        <script type="text/javascript">
+            var base_url = '<?php echo Mage::getBaseUrl() ?>';
+            //<![CDATA[
+            
+            var ajaxcart = new Ajaxcartpro('<?php echo intval(strpos(Mage::app()->getFrontController()->getRequest()->getPathInfo(), '/checkout/') !== false) ?>','<?php echo Mage::getStoreConfig('ajaxcartpro/general/Enable_cart_update');?>');
+            //]]>
+        
+        </script>
+        
+         <div id="cart-error"></div>
+        <div id="product-cart"></div>
+        <div class="clear"></div>
+    </div>
+</div>
+<!-- Popup-box ends -->
+
+<!-- Custom option popupbox starts -->
+<div id="custom-option" style="display: none;"></div>
+<!-- Custom option popupbox ends -->
+
+<!-- Loading box starts -->
+
+<div id="fade"  style="display: none; "></div>
+<div id="loading-fade" style="display: none; "></div>
+<!-- Loading box ends here -->
+               
